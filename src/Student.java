@@ -21,4 +21,28 @@ public class Student {
         totalScore = 0;
 
     }
+
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+
+    public String getFirstName(){
+        return firstName;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public void setTotalScore(){
+        totalScore = compSciNum + familiarML + expGIS + expAWS;
+    }
+
+    public int getTotalScore(){
+        return totalScore;
+    }
 }
