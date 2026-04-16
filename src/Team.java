@@ -20,7 +20,7 @@ public class Team {
     }
 
     public void showTeamMembers(){
-        Array[String] membersOfTeam = new Array[5];
+        String[] membersOfTeam = new String[5];
         for (Student member : members){
             membersOfTeam.add(member.getFirstName() + " " + member.getLastName() + " " + member.get);
         }
