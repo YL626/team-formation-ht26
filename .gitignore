@@ -1,0 +1,30 @@
+# Maven
+target/
+
+# Compiled class files
+*.class
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Temporary files
+*.tmp
+*.swp
+
+# Mac/Linux hidden files
+*.sw?
+
+# Maven wrapper (optional keep or ignore depending on use)
+.mvn/wrapper/maven-wrapper.jar
+
+# Environment files
+.env
