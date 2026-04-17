@@ -1,6 +1,9 @@
 # team-formation-ht26
 Team formation script for DevNet 2026 Spring Hackathon 
 
+# Data Context
+
+## Response Weight Values
 Please note, when getting the score value from CSV entries we compare the beginning of each possible answer as these are multiple choice questions with set responses.
 
 What is your level of familiarity with machine learning (ML)? 
@@ -24,3 +27,11 @@ Yes: 3 No: 0
 
 Do you have experience working with Amazon Web Services (i.e. ECS, S3 Buckets) 
 Yes : 2  No : 0 
+
+
+# Future Plans
+Add averages and standard deviations to truly ensure balanced teams
+Add leftover student auto-handling 
+Add a more developed README
+Add student lookup (maps)
+Add UI
