@@ -2,22 +2,20 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-//import org.apache.commons.csv.CSVFormat;
-//import org.apache.commons.csv.CSVRecord;
-
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVRecord;
 public class Formation {
 
     private static String inputFile;
 
 
-    /*private static void intakeInputInfo(String filename) throws IOException{
+    private static void intakeInputInfo(String filename) throws IOException{
         Reader inputReader = new FileReader(filename);
         Iterable<CSVRecord> entries = CSVFormat.DEFAULT.parse(inputReader);
         for (CSVRecord entry: entries){
-            entryReader(entry);
         }
         inputReader.close();
-    } */
+    } 
 
     private static void formationRunner(String[] args) throws FileNotFoundException, IOException{
         inputFile = args[0];

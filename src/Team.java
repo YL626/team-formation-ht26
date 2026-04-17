@@ -32,5 +32,9 @@ public class Team {
     public int size(){
         return teamSize;
     }
+
+    public int getTeamScore(){
+        return totalTeamSkillScore;
+    }
     
 }
