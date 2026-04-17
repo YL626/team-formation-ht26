@@ -36,7 +36,7 @@ public class Formation {
     }
 
     private static void studentSetup(){
-        
+
     }
 
     private static void entryReader(CSVRecord entry){
@@ -54,7 +54,8 @@ public class Formation {
 
 
     private static void formationRunner(String[] args) throws FileNotFoundException, IOException{
-        inputFile = args[0];
+        String inputFile = args[0];
+        intakeInputInfo(inputFile);
         //intake and create students
         
     }
