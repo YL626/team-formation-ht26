@@ -18,12 +18,11 @@ public class Formation {
     private static int maxStudents = 108;
 
     private static ArrayList<Team> allTeams = new ArrayList<>();
-    private static PriorityQueue<Team> pqTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore));
+    private static PriorityQueue<Team> pqTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore).reversed());
 
     private static ArrayList<Student> allStudents = new ArrayList<>();
 
-    private static boolean teamWithThreeNeeded = false;
-
+    private static ArrayList<Student> leftoverStudents = new ArrayList<>();
 
     private static void intakeInputInfo(String filename) throws IOException{
         Reader inputReader = new FileReader(filename);
@@ -50,7 +49,6 @@ public class Formation {
             }
             case 3 -> {
                 numOfTeams++;
-                teamWithThreeNeeded = true;
                 System.out.println("One team of 3 must be made");
                 System.out.println(numOfTeams);
             }
@@ -107,8 +105,8 @@ public class Formation {
         totalStudents++;
     }
 
-    private static void sortStudentsHigh2Low(){
-        allStudents.sort(Comparator.comparing(Student::getTotalScore).reversed());
+    private static void sortStudentsLow2High(){
+        allStudents.sort(Comparator.comparingInt(Student::getTotalScore));
     }
 
     private static void makeTeamswithLeaders(){
@@ -123,6 +121,10 @@ public class Formation {
 
     private static void fillTeams(){
         for (Student student : allStudents){
+            if (pqTeams.isEmpty()){
+                leftoverStudents.add(student);
+                continue;
+            }
             Team highestTeam = pqTeams.poll();
             highestTeam.addTeamMember(student);
             if (highestTeam.hasSpace()){
@@ -131,11 +133,18 @@ public class Formation {
         }
     }
 
+    private static void spreadLeftovers(){
+        for (Student leftover : leftoverStudents){
+            System.out.println("Please manually add " + leftover.getFirstName() + " " + leftover.getLastName() + " to the weakest team.");
+        }
+    }
+
     private static void displayTeams(){
         int count = 1;
         for (Team team :allTeams){
             System.out.println("Team " + count);
             team.showTeamMembers();
+            System.out.println("Skill Score: " + team.getTeamScore());
             count++;
         }
     }
@@ -144,11 +153,12 @@ public class Formation {
     private static void formationRunner(String[] args) throws FileNotFoundException, IOException{
         String inputFile = args[0];
         intakeInputInfo(inputFile);
-        sortStudentsHigh2Low();
+        sortStudentsLow2High();
         findNumOfTeams();
         makeTeamswithLeaders();
         fillTeams();
         displayTeams();
+        spreadLeftovers();
     }
 
 

@@ -24,7 +24,7 @@ public class Team {
     }
 
     public void showTeamMembers(){
-        String[] membersOfTeam = new String[4];
+        String[] membersOfTeam = new String[5];
         for (int i = 0; i < teamSize; i++){
             membersOfTeam[i] = members.get(i).getFirstName() + " " + members.get(i).getLastName() + " " + members.get(i).getID();
         }
