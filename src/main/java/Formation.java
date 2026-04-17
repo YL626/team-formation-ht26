@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
@@ -100,12 +101,31 @@ public class Formation {
         totalStudents++;
     }
 
+    private static void sortStudentsLow2High(){
+        allStudents.sort(Comparator.comparing(Student::getTotalScore));
+    }
+
+    private static void makeTeams(){
+        
+    }
+
+    private static void displayTeams(){
+        int count = 1;
+        for (Team team :teams){
+            System.out.println("Team " + count);
+            team.showTeamMembers();
+            count++;
+        }
+    }
+
 
     private static void formationRunner(String[] args) throws FileNotFoundException, IOException{
         String inputFile = args[0];
         intakeInputInfo(inputFile);
+        sortStudentsLow2High();
         findNumOfTeams();
         
+        displayTeams();
     }
 
 
@@ -114,16 +134,12 @@ public class Formation {
             formationRunner(args);
         } catch (FileNotFoundException noFile){
             System.err.println("Error: " + noFile.getMessage());
-            return;
         } catch (IOException ioException){
             System.err.println("Error: " + ioException.getMessage());
-            return;
         } catch (NumberFormatException wrongNum){
             System.err.println("Error: " + wrongNum.getMessage());
-            return;
         } catch (IllegalArgumentException wrongArg){
             System.err.println("Error: " + wrongArg.getMessage());
-            return;
         }
     }
     

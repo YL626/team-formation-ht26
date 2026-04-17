@@ -24,11 +24,11 @@ public class Team {
     }
 
     public void showTeamMembers(){
-        String[] membersOfTeam = new String[5];
+        String[] membersOfTeam = new String[4];
         for (int i = 0; i < teamSize; i++){
             membersOfTeam[i] = members.get(i).getFirstName() + " " + members.get(i).getLastName() + " " + members.get(i).getID();
         }
-        Arrays.toString(membersOfTeam);
+        System.out.println(Arrays.toString(membersOfTeam));
     }
 
     public int size(){
@@ -37,6 +37,10 @@ public class Team {
 
     public int getTeamScore(){
         return totalTeamSkillScore;
+    }
+
+    public boolean hasSpace(){
+        return teamSize < 4;
     }
     
 }
