@@ -10,7 +10,7 @@ public class Team {
     private int teamID;
 
 
-    public void Team(Student leader, int teamID) {
+    public Team(Student leader, int teamID) {
         totalTeamSkillScore += leader.getTotalScore();
         this.teamID = teamID;
         members.add(leader);
