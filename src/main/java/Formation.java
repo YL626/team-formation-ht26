@@ -29,9 +29,14 @@ public class Formation {
     private static ArrayList<Student> leftoverStudents = new ArrayList<>();
 
     private static void intakeInputInfo(String filename) throws IOException{
+        int count = 0;
         Reader inputReader = new FileReader(filename);
         Iterable<CSVRecord> entries = CSVFormat.DEFAULT.parse(inputReader);
         for (CSVRecord entry: entries){
+            if (count == 0){
+                count++;
+                continue;
+            }
             if (entry.get(6).isEmpty()){
                 continue;
             }
@@ -49,16 +54,16 @@ public class Formation {
         switch (remaining) {
             case 0 -> {
                 System.out.println("Tremendous, no leftover students!");
-                System.out.println(numOfTeams);
+                System.out.println("Total teams: " + numOfTeams);
             }
             case 3 -> {
                 numOfTeams++;
                 System.out.println("One team of 3 must be made");
-                System.out.println(numOfTeams);
+                System.out.println("Total teams: " + numOfTeams);
             }
             default -> {
                 System.out.println("Warning: " + remaining + " students are leftover, please assign them a team manually.");
-                System.out.println(numOfTeams);
+                System.out.println("Total teams: " + numOfTeams);
             }
         }
     }
@@ -115,8 +120,9 @@ public class Formation {
 
     private static void makeTeamswithLeaders(){
         for (int i = 0; i < numOfTeams; i++){
-            Student leader = allStudents.get(0);
-            allStudents.remove(0);
+            int lastIndex = allStudents.size() - 1;
+            Student leader = allStudents.get(lastIndex);
+            allStudents.remove(lastIndex);
             Team newTeam = new Team(leader, i+1);
             allTeams.add(newTeam);
             pqTeams.add(newTeam);
@@ -138,8 +144,13 @@ public class Formation {
     }
 
     private static void spreadLeftovers(){
-        for (Student leftover : leftoverStudents){
-            System.out.println("Please manually add " + leftover.getFirstName() + " " + leftover.getLastName() + " to the weakest team.");
+        PriorityQueue<Team> weakestTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore));
+        weakestTeams.addAll(allTeams);
+
+        for (Student leftover : leftoverStudents) {
+            Team weakestTeam = weakestTeams.poll();
+            weakestTeam.addTeamMember(leftover);
+            weakestTeams.add(weakestTeam);
         }
     }
 
@@ -158,12 +169,9 @@ public class Formation {
             int count = 1;
             for (Team team :allTeams){
                 pw.println("Team " + count);
-                team.showTeamMembers();
+                pw.println(team.teamMembersArray());
                 pw.println("Skill Score: " + team.getTeamScore());
                 count++;
-            }
-            for (Student leftover : leftoverStudents){
-                pw.println("Please manually add " + leftover.getFirstName() + " " + leftover.getLastName() + " to the weakest team.");
             }
         }
     }
@@ -176,9 +184,9 @@ public class Formation {
         findNumOfTeams();
         makeTeamswithLeaders();
         fillTeams();
-        displayTeams();
         spreadLeftovers();
-
+        displayTeams();
+        exportCSV();
     }
 
 

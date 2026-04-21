@@ -31,6 +31,18 @@ public class Team {
         System.out.println(Arrays.toString(membersOfTeam));
     }
 
+    public String teamMembersArray() {
+        ArrayList<String> membersOfTeam = new ArrayList<>();
+        for (int i = 0; i < teamSize; i++) {
+            membersOfTeam.add(
+                members.get(i).getFirstName() + " "
+                + members.get(i).getLastName() + " "
+                + members.get(i).getID()
+            );
+        }
+        return membersOfTeam.toString();
+    }
+
     public int size(){
         return teamSize;
     }
@@ -41,6 +53,10 @@ public class Team {
 
     public boolean hasSpace(){
         return teamSize < 4;
+    }
+
+    public boolean hasLeftoverSpace(){
+        return teamSize < 5;
     }
     
 }
