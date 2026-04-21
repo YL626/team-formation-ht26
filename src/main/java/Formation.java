@@ -22,7 +22,7 @@ public class Formation {
     private static int maxStudents = 108;
 
     private static ArrayList<Team> allTeams = new ArrayList<>();
-    private static PriorityQueue<Team> pqTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore).reversed());
+    private static PriorityQueue<Team> pqTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore));
 
     private static ArrayList<Student> allStudents = new ArrayList<>();
 
@@ -128,16 +128,18 @@ public class Formation {
         }
     }
 
-    private static void fillTeams(){
-        for (Student student : allStudents){
-            if (pqTeams.isEmpty()){
-                leftoverStudents.add(student);
+    private static void fillTeams() {
+        for (int i = allStudents.size() - 1; i >= 0; i--) {
+            if (pqTeams.isEmpty()) {
+                leftoverStudents.add(allStudents.get(i));
                 continue;
             }
-            Team highestTeam = pqTeams.poll();
-            highestTeam.addTeamMember(student);
-            if (highestTeam.hasSpace()){
-                pqTeams.add(highestTeam);
+            
+            Team weakestTeam = pqTeams.poll();
+            weakestTeam.addTeamMember(allStudents.get(i));
+
+            if (weakestTeam.hasSpace()) {
+                pqTeams.add(weakestTeam);
             }
         }
     }
