@@ -47,7 +47,6 @@ public class Formation {
 
 
 
-    //PLEASE REMEMBER TO FIX LEFTOVER STUDENT HANDLING
     private static void findNumOfTeams(){
         numOfTeams = totalStudents / 4;
         int remaining = totalStudents % 4;
@@ -62,7 +61,7 @@ public class Formation {
                 System.out.println("Total teams: " + numOfTeams);
             }
             default -> {
-                System.out.println("Warning: " + remaining + " students are leftover, please assign them a team manually.");
+                System.out.println("Warning: " + remaining + " students are leftover, watch for uneven teams.");
                 System.out.println("Total teams: " + numOfTeams);
             }
         }
