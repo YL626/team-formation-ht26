@@ -1,6 +1,24 @@
 # team-formation-ht26
 Team formation script for DevNet 2026 Spring Hackathon 
 
+# Requirements
+Java 17+ Installed
+Maven wrapper is within the program, no install needed.
+
+# How to Run
+Before running, please put input file into the project folder and rename it to 'participants.csv'
+Alternativeley, your input could be the filepath to your desired file.
+
+Windows:
+
+.\mvnw.cmd exec:java "-Dexec.args=participants.csv"
+
+Linux/MacOS:
+
+chmod +x mvnw
+./mvnw exec:java "-Dexec.args=participants.csv"
+
+
 # Data Context
 
 ## Response Weight Values
@@ -31,7 +49,6 @@ Yes : 2  No : 0
 
 # Future Plans
 Add averages and standard deviations to truly ensure balanced teams
-Add leftover student auto-handling 
 Add a more developed README
 Add student lookup (maps)
 Add UI
