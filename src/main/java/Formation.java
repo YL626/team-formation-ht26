@@ -1,7 +1,11 @@
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Reader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -149,6 +153,21 @@ public class Formation {
         }
     }
 
+    private static void exportCSV() throws IOException {
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("teams.csv")))){
+            int count = 1;
+            for (Team team :allTeams){
+                pw.println("Team " + count);
+                team.showTeamMembers();
+                pw.println("Skill Score: " + team.getTeamScore());
+                count++;
+            }
+            for (Student leftover : leftoverStudents){
+                pw.println("Please manually add " + leftover.getFirstName() + " " + leftover.getLastName() + " to the weakest team.");
+            }
+        }
+    }
+
 
     private static void formationRunner(String[] args) throws FileNotFoundException, IOException{
         String inputFile = args[0];
@@ -159,6 +178,7 @@ public class Formation {
         fillTeams();
         displayTeams();
         spreadLeftovers();
+
     }
 
 
