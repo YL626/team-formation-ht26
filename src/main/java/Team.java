@@ -36,8 +36,7 @@ public class Team {
         for (int i = 0; i < teamSize; i++) {
             membersOfTeam.add(
                 members.get(i).getFirstName() + " "
-                + members.get(i).getLastName() + " "
-                + members.get(i).getID()
+                + members.get(i).getLastName()
             );
         }
         return membersOfTeam.toString();

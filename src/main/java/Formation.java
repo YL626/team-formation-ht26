@@ -134,7 +134,7 @@ public class Formation {
                 leftoverStudents.add(allStudents.get(i));
                 continue;
             }
-            
+
             Team weakestTeam = pqTeams.poll();
             weakestTeam.addTeamMember(allStudents.get(i));
 
@@ -171,7 +171,6 @@ public class Formation {
             for (Team team :allTeams){
                 pw.println("Team " + count);
                 pw.println(team.teamMembersArray());
-                pw.println("Skill Score: " + team.getTeamScore());
                 count++;
             }
         }
