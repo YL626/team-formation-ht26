@@ -6,17 +6,18 @@ Java 17+ Installed
 Maven wrapper is within the program, no install needed.
 
 # How to Run
+
 Before running, please put input file into the project folder and rename it to 'participants.csv'
 Alternativeley, your input could be the filepath to your desired file.
 
 Windows:
 
-.\mvnw.cmd exec:java "-Dexec.args=participants.csv"
+.\mvnw.cmd exec:java "-Dexec.args=database/files/test.csv"
 
 Linux/MacOS:
 
 chmod +x mvnw
-./mvnw exec:java "-Dexec.args=participants.csv"
+./mvnw exec:java "-Dexec.args=database/files/test.csv"
 
 
 # Data Context
