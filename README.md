@@ -7,7 +7,7 @@ Maven wrapper is within the program, no install needed.
 
 # How to Run
 
-Before running, please put input file into the project folder and rename it to 'participants.csv'
+Before running, please move your input file to the database/files folder.
 Alternativeley, your input could be the filepath to your desired file.
 
 Windows:
