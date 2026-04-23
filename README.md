@@ -1,4 +1,5 @@
 # team-formation-ht26
+Built for Colorado State University Hackathon operations.
 Team formation script for DevNet 2026 Spring Hackathon 
 
 # Requirements
