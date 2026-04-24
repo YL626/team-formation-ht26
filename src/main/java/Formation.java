@@ -13,7 +13,6 @@ import java.util.PriorityQueue;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-
 public class Formation {
 
     private static int numOfTeams;
@@ -28,26 +27,24 @@ public class Formation {
 
     private static ArrayList<Student> leftoverStudents = new ArrayList<>();
 
-    private static void intakeInputInfo(String filename) throws IOException{
+    private static void intakeInputInfo(String filename) throws IOException {
         int count = 0;
         Reader inputReader = new FileReader(filename);
         Iterable<CSVRecord> entries = CSVFormat.DEFAULT.parse(inputReader);
-        for (CSVRecord entry: entries){
-            if (count == 0){
+        for (CSVRecord entry : entries) {
+            if (count == 0) {
                 count++;
                 continue;
             }
-            if (entry.get(6).isEmpty()){
+            if (entry.get(6).isEmpty()) {
                 continue;
             }
             entryReader(entry);
         }
         inputReader.close();
-    } 
+    }
 
-
-
-    private static void findNumOfTeams(){
+    private static void findNumOfTeams() {
         numOfTeams = totalStudents / 4;
         int remaining = totalStudents % 4;
         switch (remaining) {
@@ -67,12 +64,12 @@ public class Formation {
         }
     }
 
-    private static int compSciLevelScore(String compSciLevel){
+    private static int compSciLevelScore(String compSciLevel) {
         Character level = compSciLevel.charAt(0);
         return Character.isDigit(level) ? Character.getNumericValue(level) : 0;
     }
 
-    private static int mlFamiliarityScore(String mlFamiliarity){
+    private static int mlFamiliarityScore(String mlFamiliarity) {
         Character familiarity = mlFamiliarity.charAt(0);
         return switch (familiarity) {
             case 'A' -> 3;
@@ -82,17 +79,17 @@ public class Formation {
         };
     }
 
-    private static int gisScore(String xpGIS){
+    private static int gisScore(String xpGIS) {
         Character responseSignal = xpGIS.charAt(0);
         return responseSignal.equals('Y') ? 3 : 0;
     }
 
-    private static int awsScore(String xpAWS){
+    private static int awsScore(String xpAWS) {
         Character responseSignal = xpAWS.charAt(0);
         return responseSignal.equals('Y') ? 2 : 0;
     }
 
-    private static void entryReader(CSVRecord entry){
+    private static void entryReader(CSVRecord entry) {
         String studentID = entry.get(8).trim();
         String firstName = entry.get(1).trim();
         String lastName = entry.get(2).trim();
@@ -113,16 +110,16 @@ public class Formation {
         totalStudents++;
     }
 
-    private static void sortStudentsLow2High(){
+    private static void sortStudentsLow2High() {
         allStudents.sort(Comparator.comparingInt(Student::getTotalScore));
     }
 
-    private static void makeTeamswithLeaders(){
-        for (int i = 0; i < numOfTeams; i++){
+    private static void makeTeamswithLeaders() {
+        for (int i = 0; i < numOfTeams; i++) {
             int lastIndex = allStudents.size() - 1;
             Student leader = allStudents.get(lastIndex);
             allStudents.remove(lastIndex);
-            Team newTeam = new Team(leader, i+1);
+            Team newTeam = new Team(leader, i + 1);
             allTeams.add(newTeam);
             pqTeams.add(newTeam);
         }
@@ -144,7 +141,7 @@ public class Formation {
         }
     }
 
-    private static void spreadLeftovers(){
+    private static void spreadLeftovers() {
         PriorityQueue<Team> weakestTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore));
         weakestTeams.addAll(allTeams);
 
@@ -155,20 +152,10 @@ public class Formation {
         }
     }
 
-    private static void displayTeams(){
-        int count = 1;
-        for (Team team :allTeams){
-            System.out.println("Team " + count);
-            team.showTeamMembers();
-            System.out.println("Skill Score: " + team.getTeamScore());
-            count++;
-        }
-    }
-
-    private static void exportCSV() throws IOException {
-        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("teams.csv")))){
+    private static void exportPublicCSV() throws IOException {
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("public_teams.csv")))) {
             int count = 1;
-            for (Team team :allTeams){
+            for (Team team : allTeams) {
                 pw.println("Team " + count);
                 pw.println(team.teamMembersArray());
                 count++;
@@ -176,8 +163,19 @@ public class Formation {
         }
     }
 
+    private static void exportOrganizerCSV() throws IOException {
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("teams_with_personal_data.csv")))) {
+            int count = 1;
+            for (Team team : allTeams) {
+                pw.println("Team " + count);
+                pw.println(team.showTeamMemberswithID());
+                pw.println("Skill Score: " + team.getTeamScore());
+                count++;
+            }
+        }
+    }
 
-    private static void formationRunner(String[] args) throws FileNotFoundException, IOException{
+    private static void formationRunner(String[] args) throws FileNotFoundException, IOException {
         String inputFile = args[0];
         intakeInputInfo(inputFile);
         sortStudentsLow2High();
@@ -185,23 +183,22 @@ public class Formation {
         makeTeamswithLeaders();
         fillTeams();
         spreadLeftovers();
-        displayTeams();
-        exportCSV();
+        exportPublicCSV();
+        exportOrganizerCSV();
     }
 
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         try {
             formationRunner(args);
-        } catch (FileNotFoundException noFile){
+        } catch (FileNotFoundException noFile) {
             System.err.println("Error: " + noFile.getMessage());
-        } catch (IOException ioException){
+        } catch (IOException ioException) {
             System.err.println("Error: " + ioException.getMessage());
-        } catch (NumberFormatException wrongNum){
+        } catch (NumberFormatException wrongNum) {
             System.err.println("Error: " + wrongNum.getMessage());
-        } catch (IllegalArgumentException wrongArg){
+        } catch (IllegalArgumentException wrongArg) {
             System.err.println("Error: " + wrongArg.getMessage());
         }
     }
-    
+
 }

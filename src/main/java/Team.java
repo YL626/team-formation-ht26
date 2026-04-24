@@ -23,12 +23,12 @@ public class Team {
         teamSize++;
     }
 
-    public void showTeamMembers(){
+    public String showTeamMemberswithID(){
         String[] membersOfTeam = new String[5];
         for (int i = 0; i < teamSize; i++){
             membersOfTeam[i] = members.get(i).getFirstName() + " " + members.get(i).getLastName() + " " + members.get(i).getID();
         }
-        System.out.println(Arrays.toString(membersOfTeam));
+        return Arrays.toString(membersOfTeam);
     }
 
     public String teamMembersArray() {
