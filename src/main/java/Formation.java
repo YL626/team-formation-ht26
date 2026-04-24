@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -22,6 +21,8 @@ public class Formation {
 
     private static ArrayList<Team> allTeams = new ArrayList<>();
     private static PriorityQueue<Team> pqTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore));
+
+    private static ArrayList<Student> reservedStudents = new ArrayList<>();
 
     private static ArrayList<Student> allStudents = new ArrayList<>();
 
