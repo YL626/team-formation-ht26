@@ -16,17 +16,71 @@ public class Formation {
 
     private static int numOfTeams;
 
-    private static int totalStudents = 0;
+    private static int enrolledStudents = 0;
     private static int maxStudents = 108;
 
     private static ArrayList<Team> allTeams = new ArrayList<>();
     private static PriorityQueue<Team> pqTeams = new PriorityQueue<>(Comparator.comparingInt(Team::getTeamScore));
 
-    private static ArrayList<Student> reservedStudents = new ArrayList<>();
-
     private static ArrayList<Student> allStudents = new ArrayList<>();
-
     private static ArrayList<Student> leftoverStudents = new ArrayList<>();
+
+
+    public static boolean isReserved(String userID){
+        switch (userID) {
+            case "id1":
+                return true;
+            case "id2":
+                return true;
+            case "id3": 
+                return true;
+            case "id4":
+                return true;
+            case "id5":
+                return true;
+            case "id6": 
+                return true;
+            case "id7":
+                return true;
+            case "id8":
+                return true;
+            case "id9": 
+                return true;
+            case "id10":
+                return true;
+            case "id11":
+                return true;
+            case "id12": 
+                return true;
+            case "id13":
+                return true;
+            case "id14":
+                return true;
+            case "id15": 
+                return true;
+            case "id16":
+                return true;
+            case "id17":
+                return true;
+            case "id18": 
+                return true;
+            case "id19":
+                return true;
+            case "id20":
+                return true;
+            case "id21": 
+                return true;
+            case "id22":
+                return true;
+            case "id23":
+                return true;
+            case "id24": 
+                return true;
+            default:
+                break;
+        }
+        return false;
+    }
 
     private static void intakeInputInfo(String filename) throws IOException {
         int count = 0;
@@ -37,17 +91,24 @@ public class Formation {
                 count++;
                 continue;
             }
+            if (isReserved(entry.get(8))){
+                entryReader(entry);
+                continue;
+            }
             if (entry.get(6).isEmpty()) {
                 continue;
             }
-            entryReader(entry);
+            if (enrolledStudents<maxStudents){
+                entryReader(entry);
+            }
+
         }
         inputReader.close();
     }
 
     private static void findNumOfTeams() {
-        numOfTeams = totalStudents / 4;
-        int remaining = totalStudents % 4;
+        numOfTeams = enrolledStudents / 4;
+        int remaining = enrolledStudents % 4;
         switch (remaining) {
             case 0 -> {
                 System.out.println("Tremendous, no leftover students!");
@@ -108,7 +169,7 @@ public class Formation {
         currentStudent.setExpGIS(gisScore(xpGIS));
         currentStudent.setExpAWS(awsScore(xpAWS));
         allStudents.add(currentStudent);
-        totalStudents++;
+        enrolledStudents++;
     }
 
     private static void sortStudentsLow2High() {
