@@ -233,7 +233,7 @@ public class Formation {
             int count = 1;
             for (Team team : allTeams) {
                 pw.println("Team " + count);
-                pw.println(team.teamMembersArray());
+                pw.println(team.showTeamMembers());
                 count++;
             }
         }

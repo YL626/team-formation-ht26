@@ -31,13 +31,10 @@ public class Team {
         return membersOfTeam.toString();
     }
 
-    public String teamMembersArray() {
+    public String showTeamMembers() {
         ArrayList<String> membersOfTeam = new ArrayList<>();
         for (int i = 0; i < teamSize; i++) {
-            membersOfTeam.add(
-                members.get(i).getFirstName() + " "
-                + members.get(i).getLastName()
-            );
+            membersOfTeam.add(members.get(i).getFirstName() + " " + members.get(i).getLastName());
         }
         return membersOfTeam.toString();
     }
