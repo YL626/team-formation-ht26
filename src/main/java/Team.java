@@ -24,11 +24,11 @@ public class Team {
     }
 
     public String showTeamMemberswithID(){
-        String[] membersOfTeam = new String[5];
+        ArrayList<String> membersOfTeam = new ArrayList<>();
         for (int i = 0; i < teamSize; i++){
-            membersOfTeam[i] = members.get(i).getFirstName() + " " + members.get(i).getLastName() + " " + members.get(i).getID();
+            membersOfTeam.add(members.get(i).getFirstName() + " " + members.get(i).getLastName() + " " + members.get(i).getID());
         }
-        return Arrays.toString(membersOfTeam);
+        return membersOfTeam.toString();
     }
 
     public String teamMembersArray() {

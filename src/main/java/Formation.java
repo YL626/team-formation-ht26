@@ -82,7 +82,7 @@ public class Formation {
         return false;
     }
 
-    private static void intakeInputInfo(String filename) throws IOException {
+    private static void intakeReservedStudentsInfo(String filename) throws IOException{
         int count = 0;
         Reader inputReader = new FileReader(filename);
         Iterable<CSVRecord> entries = CSVFormat.DEFAULT.parse(inputReader);
@@ -93,6 +93,20 @@ public class Formation {
             }
             if (isReserved(entry.get(8))){
                 entryReader(entry);
+            }
+        }
+    }
+
+    private static void intakeInputInfo(String filename) throws IOException {
+        int count = 0;
+        Reader inputReader = new FileReader(filename);
+        Iterable<CSVRecord> entries = CSVFormat.DEFAULT.parse(inputReader);
+        for (CSVRecord entry : entries) {
+            if (count == 0) {
+                count++;
+                continue;
+            }
+            if (isReserved(entry.get(8))){
                 continue;
             }
             if (entry.get(6).isEmpty()) {
@@ -239,6 +253,7 @@ public class Formation {
 
     private static void formationRunner(String[] args) throws FileNotFoundException, IOException {
         String inputFile = args[0];
+        intakeReservedStudentsInfo(inputFile);
         intakeInputInfo(inputFile);
         sortStudentsLow2High();
         findNumOfTeams();
