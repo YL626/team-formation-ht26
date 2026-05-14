@@ -1,4 +1,5 @@
 # team-formation-ht26
+Built for Colorado State University Hackathon operations.
 Team formation script for DevNet 2026 Spring Hackathon 
 
 # Requirements
@@ -7,7 +8,7 @@ Maven wrapper is within the program, no install needed.
 
 # How to Run
 
-Before running, please put input file into the project folder and rename it to 'participants.csv'
+Before running, please move your input file to the database/files folder.
 Alternativeley, your input could be the filepath to your desired file.
 
 Windows:
