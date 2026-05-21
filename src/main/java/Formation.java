@@ -25,61 +25,19 @@ public class Formation {
     private static ArrayList<Student> allStudents = new ArrayList<>();
     private static ArrayList<Student> leftoverStudents = new ArrayList<>();
 
-
+    //format: id[number] ex: id1 id2 id3
     public static boolean isReserved(String userID){
-        switch (userID) {
-            case "id1":
+        String substring = userID.substring(2);
+        try {
+            int id = Integer.parseInt(substring);
+            if(id > 0 && id < 25){
                 return true;
-            case "id2":
-                return true;
-            case "id3": 
-                return true;
-            case "id4":
-                return true;
-            case "id5":
-                return true;
-            case "id6": 
-                return true;
-            case "id7":
-                return true;
-            case "id8":
-                return true;
-            case "id9": 
-                return true;
-            case "id10":
-                return true;
-            case "id11":
-                return true;
-            case "id12": 
-                return true;
-            case "id13":
-                return true;
-            case "id14":
-                return true;
-            case "id15": 
-                return true;
-            case "id16":
-                return true;
-            case "id17":
-                return true;
-            case "id18": 
-                return true;
-            case "id19":
-                return true;
-            case "id20":
-                return true;
-            case "id21": 
-                return true;
-            case "id22":
-                return true;
-            case "id23":
-                return true;
-            case "id24": 
-                return true;
-            default:
-                break;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
     private static void intakeReservedStudentsInfo(String filename) throws IOException{
