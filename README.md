@@ -67,6 +67,7 @@ Java 17+ Installed
 ## 📡 Future Plans
 This README format wouldn't be possible without Bane Sullivan and Santago Soler's [README guide](https://github.com/banesullivan/README).
 
+Add tests (internal)\
 Add averages and standard deviations to truly ensure balanced teams\
 Add student lookup (maps)\
 Add UI
