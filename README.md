@@ -68,6 +68,6 @@ Java 17+ Installed
 Add tests (internal)\
 Add averages and standard deviations to truly ensure balanced teams\
 Add student lookup (maps)\
-Add UI\
+Add UI
 
 This README format wouldn't be possible without Bane Sullivan and Santago Soler's [README guide](https://github.com/banesullivan/README).
